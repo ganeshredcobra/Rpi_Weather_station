@@ -5,7 +5,7 @@ from sys import exit
 import serial,os
 import time
 from datetime import datetime
-
+import commands
 
 
 
@@ -16,7 +16,9 @@ def main():
 	STAMP = '%s' % (datetime.now().strftime(FORMAT))
 	return STAMP
    time.sleep(120)
-   ser = serial.Serial("/dev/ttyUSB0", 9600, timeout=1)
+   raw=commands.getoutput("dmesg | grep 'FTDI USB Serial Device converter now attached to'")
+   port=raw[-7:]
+   ser = serial.Serial("/dev/%s"%port, 9600, timeout=1)
    while True:
        #ser.flush()
        data=ser.readline()
