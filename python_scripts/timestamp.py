@@ -16,7 +16,7 @@ def main():
 	STAMP = '%s' % (datetime.now().strftime(FORMAT))
 	return STAMP
    time.sleep(120)
-   raw=commands.getoutput("dmesg | grep 'FTDI USB Serial Device converter now attached to'")
+   raw=commands.getoutput("dmesg | grep 'pl2303 converter now attached to'")
    port=raw[-7:]
    ser = serial.Serial("/dev/%s"%port, 9600, timeout=1)
    while True:
