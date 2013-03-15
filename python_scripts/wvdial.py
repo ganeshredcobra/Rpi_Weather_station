@@ -13,6 +13,14 @@ def main():
 	time.sleep(100)
 	os.system('sudo usb_modeswitch -c /etc/usb_modeswitch.d/12d1\:1505')
 	time.sleep(25)
+	raw=commands.getoutput("dmesg | grep 'GSM modem (1-port) converter now attached to'")
+	port=raw.splitlines()[0][-7:]
+	path='/etc/wvdial.conf'
+	file=open('%s'%path,'r+')
+	new=file.read()
+	text=new.replace('Modem = /dev/ttyUSB0','Modem = /dev/%s'%port)
+	file=open('%s'%path,'w+')
+	file.write('%s'%text)
 	os.system('sudo wvdial')
 	syslog.syslog('wvdial Processing started')
 
