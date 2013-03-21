@@ -1,0 +1,1093 @@
+ #include <16F877A.h> A    1 :V17
+ //////// Standard Header file for the PIC16F877A device ////////////////  B    1 :I1
+#device PIC16F877A  B    2 :
+#nolist  B    3N:X0
+//////// Program memory: 8192x14  Data RAM: 367  Stack: 8  B    4N:
+//////// I/O: 33   Analog Pins: 8  B    5N:
+//////// Data EEPROM: 256  B    6N:
+//////// C Scratch area: 77   ID Location: 2000  B    7N:
+//////// Fuses: LP,XT,HS,RC,NOWDT,WDT,NOPUT,PUT,PROTECT,DEBUG,NODEBUG  B    8N:
+//////// Fuses: NOPROTECT,NOBROWNOUT,BROWNOUT,LVP,NOLVP,CPD,NOCPD,WRT_50%  B    9N:
+//////// Fuses: NOWRT,WRT_25%,WRT_5%  B   10N:
+////////   B   11N:
+////////////////////////////////////////////////////////////////// I/O  B   12N:
+// Discrete I/O Functions: SET_TRIS_x(), OUTPUT_x(), INPUT_x(),  B   13N:
+//                         PORT_B_PULLUPS(), INPUT(),  B   14N:
+//                         OUTPUT_LOW(), OUTPUT_HIGH(),  B   15N:
+//                         OUTPUT_FLOAT(), OUTPUT_BIT()  B   16N:
+// Constants used to identify pins in the above are:  B   17N:
+  B   18N:
+#define PIN_A0  40  B   19N:
+#define PIN_A1  41  B   20N:
+#define PIN_A2  42  B   21N:
+#define PIN_A3  43  B   22N:
+#define PIN_A4  44  B   23N:
+#define PIN_A5  45  B   24N:
+  B   25N:
+#define PIN_B0  48  B   26N:
+#define PIN_B1  49  B   27N:
+#define PIN_B2  50  B   28N:
+#define PIN_B3  51  B   29N:
+#define PIN_B4  52  B   30N:
+#define PIN_B5  53  B   31N:
+#define PIN_B6  54  B   32N:
+#define PIN_B7  55  B   33N:
+  B   34N:
+#define PIN_C0  56  B   35N:
+#define PIN_C1  57  B   36N:
+#define PIN_C2  58  B   37N:
+#define PIN_C3  59  B   38N:
+#define PIN_C4  60  B   39N:
+#define PIN_C5  61  B   40N:
+#define PIN_C6  62  B   41N:
+#define PIN_C7  63  B   42N:
+  B   43N:
+#define PIN_D0  64  B   44N:
+#define PIN_D1  65  B   45N:
+#define PIN_D2  66  B   46N:
+#define PIN_D3  67  B   47N:
+#define PIN_D4  68  B   48N:
+#define PIN_D5  69  B   49N:
+#define PIN_D6  70  B   50N:
+#define PIN_D7  71  B   51N:
+  B   52N:
+#define PIN_E0  72  B   53N:
+#define PIN_E1  73  B   54N:
+#define PIN_E2  74  B   55N:
+  B   56N:
+////////////////////////////////////////////////////////////////// Useful defines  B   57N:
+#define FALSE 0  B   58N:
+#define TRUE 1  B   59N:
+  B   60N:
+#define BYTE int  B   61N:
+#define BOOLEAN short int  B   62N:
+  B   63N:
+#define getc getch  B   64N:
+#define fgetc getch  B   65N:
+#define getchar getch  B   66N:
+#define putc putchar  B   67N:
+#define fputc putchar  B   68N:
+#define fgets gets  B   69N:
+#define fputs puts  B   70N:
+  B   71N:
+////////////////////////////////////////////////////////////////// Control  B   72N:
+// Control Functions:  RESET_CPU(), SLEEP(), RESTART_CAUSE()  B   73N:
+// Constants returned from RESTART_CAUSE() are:  B   74N:
+#define WDT_FROM_SLEEP  0       B   75N:
+#define WDT_TIMEOUT     8       B   76N:
+#define MCLR_FROM_SLEEP 16      B   77N:
+#define NORMAL_POWER_UP 24      B   78N:
+  B   79N:
+  B   80N:
+////////////////////////////////////////////////////////////////// Timer 0  B   81N:
+// Timer 0 (AKA RTCC)Functions: SETUP_COUNTERS() or SETUP_TIMER0(),  B   82N:
+//                              SET_TIMER0() or SET_RTCC(),  B   83N:
+//                              GET_TIMER0() or GET_RTCC()  B   84N:
+// Constants used for SETUP_TIMER0() are:  B   85N:
+#define RTCC_INTERNAL   0  B   86N:
+#define RTCC_EXT_L_TO_H 32  B   87N:
+#define RTCC_EXT_H_TO_L 48  B   88N:
+  B   89N:
+#define RTCC_DIV_1      8  B   90N:
+#define RTCC_DIV_2      0  B   91N:
+#define RTCC_DIV_4      1  B   92N:
+#define RTCC_DIV_8      2  B   93N:
+#define RTCC_DIV_16     3  B   94N:
+#define RTCC_DIV_32     4  B   95N:
+#define RTCC_DIV_64     5  B   96N:
+#define RTCC_DIV_128    6  B   97N:
+#define RTCC_DIV_256    7  B   98N:
+  B   99N:
+  B  100N:
+#define RTCC_8_BIT      0       B  101N:
+  B  102N:
+// Constants used for SETUP_COUNTERS() are the above  B  103N:
+// constants for the 1st param and the following for  B  104N:
+// the 2nd param:  B  105N:
+  B  106N:
+////////////////////////////////////////////////////////////////// WDT  B  107N:
+// Watch Dog Timer Functions: SETUP_WDT() or SETUP_COUNTERS() (see above)  B  108N:
+//                            RESTART_WDT()  B  109N:
+//  B  110N:
+#define WDT_18MS        8     B  111N:
+#define WDT_36MS        9     B  112N:
+#define WDT_72MS       10     B  113N:
+#define WDT_144MS      11     B  114N:
+#define WDT_288MS      12     B  115N:
+#define WDT_576MS      13     B  116N:
+#define WDT_1152MS     14     B  117N:
+#define WDT_2304MS     15     B  118N:
+  B  119N:
+////////////////////////////////////////////////////////////////// Timer 1  B  120N:
+// Timer 1 Functions: SETUP_TIMER_1, GET_TIMER1, SET_TIMER1  B  121N:
+// Constants used for SETUP_TIMER_1() are:  B  122N:
+//      (or (via |) together constants from each group)  B  123N:
+#define T1_DISABLED         0  B  124N:
+#define T1_INTERNAL         0x85  B  125N:
+#define T1_EXTERNAL         0x87  B  126N:
+#define T1_EXTERNAL_SYNC    0x83  B  127N:
+  B  128N:
+#define T1_CLK_OUT          8  B  129N:
+  B  130N:
+#define T1_DIV_BY_1         0  B  131N:
+#define T1_DIV_BY_2         0x10  B  132N:
+#define T1_DIV_BY_4         0x20  B  133N:
+#define T1_DIV_BY_8         0x30  B  134N:
+  B  135N:
+////////////////////////////////////////////////////////////////// Timer 2  B  136N:
+// Timer 2 Functions: SETUP_TIMER_2, GET_TIMER2, SET_TIMER2  B  137N:
+// Constants used for SETUP_TIMER_2() are:  B  138N:
+#define T2_DISABLED         0  B  139N:
+#define T2_DIV_BY_1         4  B  140N:
+#define T2_DIV_BY_4         5  B  141N:
+#define T2_DIV_BY_16        6  B  142N:
+  B  143N:
+////////////////////////////////////////////////////////////////// CCP  B  144N:
+// CCP Functions: SETUP_CCPx, SET_PWMx_DUTY  B  145N:
+// CCP Variables: CCP_x, CCP_x_LOW, CCP_x_HIGH  B  146N:
+// Constants used for SETUP_CCPx() are:  B  147N:
+#define CCP_OFF                         0  B  148N:
+#define CCP_CAPTURE_FE                  4  B  149N:
+#define CCP_CAPTURE_RE                  5  B  150N:
+#define CCP_CAPTURE_DIV_4               6  B  151N:
+#define CCP_CAPTURE_DIV_16              7  B  152N:
+#define CCP_COMPARE_SET_ON_MATCH        8  B  153N:
+#define CCP_COMPARE_CLR_ON_MATCH        9  B  154N:
+#define CCP_COMPARE_INT                 0xA  B  155N:
+#define CCP_COMPARE_RESET_TIMER         0xB  B  156N:
+#define CCP_PWM                         0xC  B  157N:
+#define CCP_PWM_PLUS_1                  0x1c  B  158N:
+#define CCP_PWM_PLUS_2                  0x2c  B  159N:
+#define CCP_PWM_PLUS_3                  0x3c  B  160N:
+long CCP_1;  B  161N:V18
+#byte   CCP_1    =                      0x15          B  162N:
+#byte   CCP_1_LOW=                      0x15          B  163N:
+#byte   CCP_1_HIGH=                     0x16          B  164N:V19
+long CCP_2;  B  165N:V20V21
+#byte   CCP_2    =                      0x1B          B  166N:
+#byte   CCP_2_LOW=                      0x1B          B  167N:
+#byte   CCP_2_HIGH=                     0x1C          B  168N:V22
+////////////////////////////////////////////////////////////////// PSP  B  169N:
+// PSP Functions: SETUP_PSP, PSP_INPUT_FULL(), PSP_OUTPUT_FULL(),  B  170N:
+//                PSP_OVERFLOW(), INPUT_D(), OUTPUT_D()  B  171N:
+// PSP Variables: PSP_DATA  B  172N:
+// Constants used in SETUP_PSP() are:  B  173N:
+#define PSP_ENABLED                     0x10  B  174N:
+#define PSP_DISABLED                    0  B  175N:
+  B  176N:
+#byte   PSP_DATA=                       8     B  177N:V23
+  B  178N:
+////////////////////////////////////////////////////////////////// SPI  B  179N:
+// SPI Functions: SETUP_SPI, SPI_WRITE, SPI_READ, SPI_DATA_IN  B  180N:
+// Constants used in SETUP_SSP() are:  B  181N:
+#define SPI_MASTER       0x20  B  182N:
+#define SPI_SLAVE        0x24  B  183N:
+#define SPI_L_TO_H       0  B  184N:
+#define SPI_H_TO_L       0x10  B  185N:
+#define SPI_CLK_DIV_4    0  B  186N:
+#define SPI_CLK_DIV_16   1  B  187N:
+#define SPI_CLK_DIV_64   2  B  188N:
+#define SPI_CLK_T2       3  B  189N:
+#define SPI_SS_DISABLED  1  B  190N:
+  B  191N:
+#define SPI_SAMPLE_AT_END 0x8000  B  192N:
+#define SPI_XMIT_L_TO_H  0x4000  B  193N:
+  B  194N:
+////////////////////////////////////////////////////////////////// UART  B  195N:
+// Constants used in setup_uart() are:  B  196N:
+// FALSE - Turn UART off  B  197N:
+// TRUE  - Turn UART on  B  198N:
+#define UART_ADDRESS 2  B  199N:
+#define UART_DATA    4  B  200N:
+// TRUE  - Turn UART on  B  201N:
+////////////////////////////////////////////////////////////////// COMP  B  202N:
+// Comparator Variables: C1OUT, C2OUT  B  203N:
+// Constants used in setup_comparators() are:  B  204N:
+#define A0_A3_A1_A3  0xfff04  B  205N:
+#define A0_A3_A1_A2_OUT_ON_A4_A5  0xfcf03  B  206N:
+#define A0_A3_A1_A3_OUT_ON_A4_A5  0xbcf05  B  207N:
+#define NC_NC_NC_NC  0x0ff07  B  208N:
+#define A0_A3_A1_A2  0xfff02  B  209N:
+#define A0_A3_NC_NC_OUT_ON_A4  0x9ef01  B  210N:
+#define A0_VR_A1_VR 0x3ff06  B  211N:
+#define A3_VR_A2_VR 0xcff0e  B  212N:
+  B  213N:
+#bit C1OUT = 0x9c.6        B  214N:V24
+#bit C2OUT = 0x9c.7        B  215N:V25
+  B  216N:
+////////////////////////////////////////////////////////////////// VREF  B  217N:
+// Constants used in setup_vref() are:  B  218N:
+//  B  219N:
+#define VREF_LOW  0xa0  B  220N:
+#define VREF_HIGH 0x80  B  221N:
+// Or (with |) the above with a number 0-15  B  222N:
+#define VREF_A2   0x40  B  223N:
+  B  224N:
+  B  225N:
+////////////////////////////////////////////////////////////////// ADC  B  226N:
+// ADC Functions: SETUP_ADC(), SETUP_ADC_PORTS() (aka SETUP_PORT_A),  B  227N:
+//                SET_ADC_CHANNEL(), READ_ADC()  B  228N:
+// Constants used for SETUP_ADC() are:  B  229N:
+#define ADC_OFF                 0              // ADC Off  B  230N:
+#define ADC_CLOCK_DIV_2   0x10000  B  231N:
+#define ADC_CLOCK_DIV_4    0x4000  B  232N:
+#define ADC_CLOCK_DIV_8    0x0040  B  233N:
+#define ADC_CLOCK_DIV_16   0x4040  B  234N:
+#define ADC_CLOCK_DIV_32   0x0080  B  235N:
+#define ADC_CLOCK_DIV_64   0x4080  B  236N:
+#define ADC_CLOCK_INTERNAL 0x00c0              // Internal 2-6us  B  237N:
+  B  238N:
+// Constants used in SETUP_ADC_PORTS() are:  B  239N:
+#define NO_ANALOGS                           7    // None  B  240N:
+#define ALL_ANALOG                           0    // A0 A1 A2 A3 A5 E0 E1 E2 Ref=Vdd   B  241N:
+#define AN0_AN1_AN2_AN4_AN5_AN6_AN7_VSS_VREF 1    // A0 A1 A2 A5 E0 E1 E2 Ref=A3       B  242N:
+#define AN0_AN1_AN2_AN3_AN4                  2    // A0 A1 A2 A3 A5 Ref=Vdd            B  243N:
+#define AN0_AN1_AN2_AN4_VSS_VREF             3    // A0 A1 A2 A5 Ref=A3                B  244N:
+#define AN0_AN1_AN3                          4    // A0 A1 A3 Ref=Vdd  B  245N:
+#define AN0_AN1_VSS_VREF                     5    // A0 A1 Ref=A3  B  246N:
+#define AN0_AN1_AN4_AN5_AN6_AN7_VREF_VREF 0x08    // A0 A1 A5 E0 E1 E2 Ref=A2,A3       B  247N:
+#define AN0_AN1_AN2_AN3_AN4_AN5           0x09    // A0 A1 A2 A3 A5 E0 Ref=Vdd         B  248N:
+#define AN0_AN1_AN2_AN4_AN5_VSS_VREF      0x0A    // A0 A1 A2 A5 E0 Ref=A3             B  249N:
+#define AN0_AN1_AN4_AN5_VREF_VREF         0x0B    // A0 A1 A5 E0 Ref=A2,A3             B  250N:
+#define AN0_AN1_AN4_VREF_VREF             0x0C    // A0 A1 A5 Ref=A2,A3                B  251N:
+#define AN0_AN1_VREF_VREF                 0x0D    // A0 A1 Ref=A2,A3  B  252N:
+#define AN0                               0x0E    // A0  B  253N:
+#define AN0_VREF_VREF                     0x0F    // A0 Ref=A2,A3  B  254N:
+#define ANALOG_RA3_REF         0x1         //!old only provided for compatibility  B  255N:
+#define A_ANALOG               0x2         //!old only provided for compatibility    B  256N:
+#define A_ANALOG_RA3_REF       0x3         //!old only provided for compatibility    B  257N:
+#define RA0_RA1_RA3_ANALOG     0x4         //!old only provided for compatibility  B  258N:
+#define RA0_RA1_ANALOG_RA3_REF 0x5         //!old only provided for compatibility  B  259N:
+#define ANALOG_RA3_RA2_REF              0x8   //!old only provided for compatibility  B  260N:
+#define ANALOG_NOT_RE1_RE2              0x9   //!old only provided for compatibility    B  261N:
+#define ANALOG_NOT_RE1_RE2_REF_RA3      0xA   //!old only provided for compatibility    B  262N:
+#define ANALOG_NOT_RE1_RE2_REF_RA3_RA2  0xB   //!old only provided for compatibility    B  263N:
+#define A_ANALOG_RA3_RA2_REF            0xC   //!old only provided for compatibility    B  264N:
+#define RA0_RA1_ANALOG_RA3_RA2_REF      0xD   //!old only provided for compatibility  B  265N:
+#define RA0_ANALOG                      0xE   //!old only provided for compatibility  B  266N:
+#define RA0_ANALOG_RA3_RA2_REF          0xF   //!old only provided for compatibility  B  267N:
+  B  268N:
+  B  269N:
+// Constants used in READ_ADC() are:  B  270N:
+#define ADC_START_AND_READ     7   // This is the default if nothing is specified  B  271N:
+#define ADC_START_ONLY         1  B  272N:
+#define ADC_READ_ONLY          6  B  273N:
+  B  274N:
+  B  275N:
+  B  276N:
+////////////////////////////////////////////////////////////////// INT  B  277N:
+// Interrupt Functions: ENABLE_INTERRUPTS(), DISABLE_INTERRUPTS(),  B  278N:
+//                      EXT_INT_EDGE()  B  279N:
+//  B  280N:
+// Constants used in EXT_INT_EDGE() are:  B  281N:
+#define L_TO_H              0x40  B  282N:
+#define H_TO_L                 0  B  283N:
+// Constants used in ENABLE/DISABLE_INTERRUPTS() are:  B  284N:
+#define GLOBAL                    0x0BC0  B  285N:
+#define INT_RTCC                  0x0B20  B  286N:
+#define INT_RB                    0x0B08  B  287N:
+#define INT_EXT                   0x0B10  B  288N:
+#define INT_AD                    0x8C40  B  289N:
+#define INT_TBE                   0x8C10  B  290N:
+#define INT_RDA                   0x8C20  B  291N:
+#define INT_TIMER1                0x8C01  B  292N:
+#define INT_TIMER2                0x8C02  B  293N:
+#define INT_CCP1                  0x8C04  B  294N:
+#define INT_CCP2                  0x8D01  B  295N:
+#define INT_SSP                   0x8C08  B  296N:
+#define INT_PSP                   0x8C80  B  297N:
+#define INT_BUSCOL                0x8D08  B  298N:
+#define INT_EEPROM                0x8D10  B  299N:
+#define INT_TIMER0                0x0B20  B  300N:
+#define INT_COMP                  0x8D40  B  301N:
+  B  302N:
+#list  B  303 :X1E
+ B  303 :
+#device ADC=10 //for 10 bit resolution  A    2 :
+#fuses HS,NOWDT,PUT,NOPROTECT,NOLVP  A    3 :
+#include "pic.h" A    4 :
+ #use delay(clock=4000000)  C    1 :I2V27V29
+#fuses XT,NOWDT,BROWNOUT,PUT,NOLVP  C    2 :
+  C    3 :
+#byte tmr0    =0x01  C    4 :V30
+#byte pcl     =0x02  C    5 :V31
+#byte status  =0x03  C    6 :V32
+#byte porta   =0x05  C    7 :V33
+	#bit ra0  =0x05.0  C    8 :V34
+	#bit ra1  =0x05.1  C    9 :V35
+	#bit ra2  =0x05.2  C   10 :V36
+	#bit ra3  =0x05.3  C   11 :V37
+	#bit ra4  =0x05.4  C   12 :V38
+	#bit ra5  =0x05.5  C   13 :V39
+  C   14 :
+#byte portb   =0x06  C   15 :V40
+	#bit rb0  =0x06.0  C   16 :V41
+	#bit rb1  =0x06.1  C   17 :V42
+	#bit rb2  =0x06.2  C   18 :V43
+	#bit rb3  =0x06.3  C   19 :V44
+	#bit rb4  =0x06.4  C   20 :V45
+	#bit rb5  =0x06.5  C   21 :V46
+	#bit rb6  =0x06.6  C   22 :V47
+	#bit rb7  =0x06.7  C   23 :V48
+  C   24 :
+#byte portc   =0x07  C   25 :V49
+	#bit rc0  =0x07.0  C   26 :V50
+	#bit rc1  =0x07.1  C   27 :V51
+	#bit rc2  =0x07.2  C   28 :V52
+	#bit rc3  =0x07.3  C   29 :V53
+	#bit rc4  =0x07.4  C   30 :V54
+	#bit rc5  =0x07.5  C   31 :V55
+	#bit rc6  =0x07.6  C   32 :V56
+	#bit rc7  =0x07.7  C   33 :V57
+  C   34 :
+#byte portd   =0x08  C   35 :V58
+	#bit rd0  =0x08.0  C   36 :V59
+	#bit rd1  =0x08.1  C   37 :V60
+	#bit rd2  =0x08.2  C   38 :V61
+	#bit rd3  =0x08.3  C   39 :V62
+	#bit rd4  =0x08.4  C   40 :V63
+	#bit rd5  =0x08.5  C   41 :V64
+	#bit rd6  =0x08.6  C   42 :V65
+	#bit rd7  =0x08.7  C   43 :V66
+  C   44 :
+#byte porte   =0x09  C   45 :V67
+	#bit re0  =0x09.0  C   46 :V68
+	#bit re1  =0x09.1  C   47 :V69
+	#bit re2  =0x09.2  C   48 :V70
+  C   49 :
+#byte pclath  =0x0a  C   50 :V71
+#byte intcon  =0x0b  C   51 :V72
+	// bits of intcon  C   52 :
+	#bit rbif   = 0x0b.0  C   53 :V73
+	#bit intf   = 0x0b.1  C   54 :V74
+	#bit t0if   = 0x0b.2  C   55 :V75
+	#bit rbie   = 0x0b.3  C   56 :V76
+	#bit inte   = 0x0b.4  C   57 :V77
+	#bit t0ie   = 0x0b.5  C   58 :V78
+	#bit peie   = 0x0b.6  C   59 :V79
+	#bit gie    = 0x0b.7  C   60 :V80
+  C   61 :
+#byte pir1    =0x0c  C   62 :V81
+#byte pir2    =0x0d  C   63 :V82
+#byte tmr1l   =0x0e  C   64 :V83
+#byte tmr1h   =0x0f  C   65 :V84
+#byte t1con   =0x10  C   66 :V85
+#byte tmr2    =0x11  C   67 :V86
+#byte t2con   =0x12  C   68 :V87
+#byte sspbuf  =0x13  C   69 :V88
+#byte sspcon  =0x14  C   70 :V89
+#byte ccpr1l  =0x15  C   71 :V90
+#byte ccpr1h  =0x16  C   72 :V91
+#byte ccp1con =0x17  C   73 :V92
+#byte rcsta   =0x18  C   74 :V93
+#byte txreg	  =0x19  C   75 :V94
+#byte rcreg	  =0x1a  C   76 :V95
+#byte ccpr2l  =0x1b  C   77 :V96
+#byte ccpr2h  =0x1c  C   78 :V97
+#byte ccp2con =0x1d  C   79 :V98
+#byte adresh  =0x1e  C   80 :V99
+#byte adcon0  =0x1f  C   81 :V100
+#bit adgo	 =0x1f.2  C   82 :V101
+  C   83 :
+#byte option_reg =0x81  C   84 :V102
+	// bits of optiopn reg  C   85 :
+	#bit ps0    =0x81.0  C   86 :V103
+	#bit ps1    =0x81.1  C   87 :V104
+	#bit ps2    =0x81.2  C   88 :V105
+	#bit psa    =0x81.3  C   89 :V106
+	#bit t0se   =0x81.4  C   90 :V107
+	#bit t0cs   =0x81.5  C   91 :V108
+	#bit intedg =0x81.6  C   92 :V109
+	#bit rbpu   =0x81.7  C   93 :V110
+  C   94 :
+#byte trisa  =0x85  C   95 :V111
+    #bit trisa0	=0x85.0  C   96 :V112
+    #bit trisa1	=0x85.1  C   97 :V113
+    #bit trisa2	=0x85.2  C   98 :V114
+    #bit trisa3	=0x85.3  C   99 :V115
+    #bit trisa4	=0x85.4  C  100 :V116
+    #bit trisa5	=0x85.5  C  101 :V117
+    #bit trisa6	=0x85.6  C  102 :V118
+    #bit trisa7	=0x85.7  C  103 :V119
+      C  104 :
+#byte trisb  =0x86      C  105 :V120
+	#bit trisb0	=0x86.0  C  106 :V121
+	#bit trisb1	=0x86.1  C  107 :V122
+	#bit trisb2	=0x86.2  C  108 :V123
+	#bit trisb3	=0x86.3  C  109 :V124
+	#bit trisb4	=0x86.4  C  110 :V125
+	#bit trisb5	=0x86.5  C  111 :V126
+	#bit trisb6	=0x86.6  C  112 :V127
+	#bit trisb7	=0x86.7  C  113 :V128
+  C  114 :
+#byte trisc  =0x87  C  115 :V129
+	#bit trisc0	=0x87.0  C  116 :V130
+	#bit trisc1	=0x87.1  C  117 :V131
+	#bit trisc2	=0x87.2  C  118 :V132
+	#bit trisc3	=0x87.3  C  119 :V133
+	#bit trisc4	=0x87.4  C  120 :V134
+	#bit trisc5	=0x87.5  C  121 :V135
+	#bit trisc6	=0x87.6  C  122 :V136
+	#bit trisc7	=0x87.7  C  123 :V137
+#byte trisd  =0x88  C  124 :V138
+#byte trise  =0x89  C  125 :V139
+#byte pie1    =0x8c  C  126 :V140
+#byte pie2    =0x8d  C  127 :V141
+#byte pcon	  =0x8e  C  128 :V142
+#byte sspcon2 =0x91  C  129 :V143
+ #bit SEN     = 0x91.0  C  130 :V144
+ #bit RSEN    = 0x91.1  C  131 :V145
+ #bit PEN     = 0x91.2  C  132 :V146
+ #bit RCEN    = 0x91.3  C  133 :V147
+ #bit ACKEN   = 0x91.4  C  134 :V148
+ #bit ACKDT   = 0x91.5  C  135 :V149
+ #bit ACKSTAT = 0x91.6  C  136 :V150
+ #bit GCEN     = 0x91.7  C  137 :V151
+#byte pr2     =0x92  C  138 :V152
+#byte sspadd  =0x93  C  139 :V153
+#byte sspstat =0x94  C  140 :V154
+ #bit BF   = 0x94.0  C  141 :V155
+#byte txsta   =0x98  C  142 :V156
+#byte spbrg   =0x99  C  143 :V157
+#byte cmcon   =0x9c  C  144 :V158
+#byte cvrcon  =0x9d  C  145 :V159
+#byte adresl  =0x9e  C  146 :V160
+#byte adcon1  =0x9f  C  147 :V161
+  C  148 :
+  C  149 :
+#byte eedata  =0x10c  C  150 :V162
+#byte eeadr   =0x10d  C  151 :V163
+#byte eedath  =0x10e  C  152 :V164
+#byte eeadrh  =0x10f  C  153 :V165
+  C  154 :
+  C  155 :
+#byte eecon1  =0x18c  C  156 :V166
+#byte eecon2  =0x18d  C  157 :V167
+  C  158 :E
+ C  158 :
+#use delay(clock=20000000)  A    5 :V169V171
+#use rs232(baud=9600,xmit=PIN_C6,rcv=PIN_C7,bits=8,errors)  A    6 :V173
+#use I2C(master, sda=PIN_C4, scl=PIN_C3)  A    7 :V178V179V181
+#include "lcd_R.h" A    8 :
+ /*LCD HEDDER 4 bit   D    1 :I3
+CAUTION : Use pic.h hedder  D    2 :
+		   : You have to configure output status of used pins from TRIS register  D    3 :
+		   : Don't use location 0x20 it is used here for inner calculations   D    4 :
+		   :Don't use d0,d1,d2,d3,RS,E,selfscroll names in the program  D    5 :
+Define the bits d0 to d3 ,RS, E and use the functions   D    6 :
+  D    7 :
+R is not used and it should be grounded  D    8 :
+*/  D    9 :
+#define 	d3	rb0//rb7	  D   10 :
+#define 	d2	rb1//rb6  D   11 :
+#define 	d1	rb2//rb5  D   12 :
+#define 	d0	rb3//rb4  D   13 :
+#define RS	rb7//rb3  D   14 :
+#define E	rb6//rb2  D   15 :
+#define selfscroll		// for strings > 16 char "selfscroll" or "newline"   D   16 :
+/*Functions avialable  D   17 :
+For printing strings directly use printc("String"); insted of prints  D   18 :
+//lcdinit();  -> initialises LCD to 2 row 5x7 cursor off right side mode  D   19 :
+go(location)	-> goto specified address from 0.  64 is second line starting address  D   20 :
+clrscr();		-> clear LCD screen  D   21 :
+print(no) -> displays Nos in dec upto 999999.999 only  D   22 :
+printc(char)	-> displays an ASCII char  D   23 :
+prints(char*)	-> Base address of char array  D   24 :
+scroll(char*,delay)		scroll a message with delay*10 ms  D   25 :
+wave(char*,delay)		wave a message with delay*10 ms  D   26 :
+command(no) -> no	Cursor	Blink  D   27 :
+			NO=000011CB					1 for ON  & 0 for off  D   28 :
+enb()		-> Give a high to low pulse in E pin  D   29 :
+outc(no)		-> output nibble to dataline and call an enb()  D   30 :
+*/  D   31 :
+  D   32 :
+#byte in =0x20  D   33 :V182
+#bit g0 =0x20.0  D   34 :V183
+#bit g1 =0x20.1  D   35 :V184
+#bit g2 =0x20.2  D   36 :V185
+#bit g3 =0x20.3   D   37 :V186
+#bit g4 =0x20.4  D   38 :V187
+#bit g5 =0x20.5  D   39 :V188
+#bit g6 =0x20.6  D   40 :V189
+#bit g7 =0x20.7  D   41 :V190
+  D   42 :
+void enb(void)  D   43 :V191f474
+{  D   44 :{66
+	E=1;  D   45 :
+	delay_us(1);  D   46 :
+	E=0;  D   47 :
+}//  D   48 :}68
+void outc(int a)  D   49 :f475V194
+{	in=a;  D   50 :{70
+	d3=g3;  D   51 :
+	d2=g2;  D   52 :
+	d1=g1;  D   53 :
+	d0=g0;  D   54 :
+	delay_us(1);  D   55 :
+	enb();  D   56 :
+}//  D   57 :}80
+  D   58 :
+lcdinit()    D   59 :f477
+{       D   60 :{82
+	  D   61 :
+	delay_ms(2);	//wait time  D   62 :
+		  D   63 :
+	RS=0;  D   64 :
+	outc(3);  D   65 :
+	delay_ms(5);    D   66 :
+	outc(3);  D   67 :
+	delay_us(50);  D   68 :
+	outc(2);  D   69 :
+	delay_us(50);  D   70 :
+	outc(2);  D   71 :
+	delay_us(50);  D   72 :
+	outc(8);  D   73 :
+	delay_us(50);	    D   74 :
+      D   75 :
+     outc(1);	//CURSOR MODE,RIGHT SH  D   76 :
+     delay_us(50);  D   77 :
+     outc(4);  D   78 :
+     delay_us(50);  D   79 :
+     outc(0);	//SCREEN,CUR-Off,  D   80 :
+     delay_us(50);  D   81 :
+     outc(0xC);  D   82 :
+     delay_us(10);  D   83 :
+     delay_us(50);	  D   84 :
+     outc(0);	//CUR RIGHT SHIFT  D   85 :
+     delay_us(50);  D   86 :
+     outc(6);  D   87 :
+     delay_us(50);  D   88 :
+    outc(0);	//CLE LCD &MEM HM CUR  D   89 :
+    delay_us(50);  D   90 :
+    outc(1);  D   91 :
+    delay_ms(2);  D   92 :
+ //   printf("Init over");  D   93 :
+     RS=1;  D   94 :
+     D   95 :
+}//  D   96 :}96
+  D   97 :
+void printc(char a)  D   98 :f478V197
+{	  D   99 :{98
+	outc (a>>4);  D  100 :
+	delay_us(50);  D  101 :
+	outc (a);  D  102 :
+	delay_us(50);  D  103 :
+}	//  D  104 :}102
+  D  105 :
+void command(int dat)  D  106 :f479V199
+{	  D  107 :{104
+	RS=0;  D  108 :
+	printc(dat);  D  109 :
+	RS=1;  D  110 :
+}	  D  111 :}106
+  D  112 :
+void go(int p)  D  113 :f481V201
+{	//p=p|0x80;  D  114 :{108
+	RS=0;  D  115 :
+	printc(p | 0x80);  D  116 :
+	RS=1;  D  117 :
+}//  D  118 :}110
+  D  119 :
+  D  120 :
+print(float q)  D  121 :f483V203
+{	  D  122 :{112
+	float p ;  D  123 :V204
+	int i=0,j=0,k=0,l=0,m=0,n=0,x;  D  124 :V205V206V207V208V209V210V211
+	i =q/100000;  D  125 :V213V214V216
+	if(i)  D  126 :
+	{  D  127 :
+	printc (i+0x30);  D  128 :{147
+	}  D  129 :}148
+	p=i;  D  130 :V218
+	q = q - p*100000;  D  131 :V220V221V223V224
+	j=q/10000;  D  132 :
+	if(i || j)  D  133 :
+	{  D  134 :
+	printc(j+0x30);  D  135 :{220
+	}  D  136 :}221
+	p=j;  D  137 :
+	q = q - p*10000;  D  138 :
+	k=q/1000;  D  139 :
+	if(i || j || k)  D  140 :
+	{printc(k+0x30);}  D  141 :{228}229
+	p=k;  D  142 :
+	q = q - p*1000;   D  143 :
+	  D  144 :
+	l=q / 100;  D  145 :
+	if( i || j || k || l )  D  146 :
+	{printc(l+0x30);}  D  147 :{238}239
+	p=l;  D  148 :
+	q = q - p *100;  D  149 :
+  D  150 :
+	m=q/10;  D  151 :
+	if(i || j || k || l || m)  D  152 :
+	{printc (m+0x30);}  D  153 :{250}251
+	q = q - m*10;  D  154 :V226V227
+	n=q;  D  155 :
+	printc(n+0x30);  D  156 :
+	q = q -n;   D  157 :
+  D  158 :
+	q=q*1000;					//Aftrer Decimel	  D  159 :
+	l=q / 100;  D  160 :
+	p=l;  D  161 :
+	q = q - p *100;  D  162 :
+	m=q/10;  D  163 :
+	q = q - m*10;  D  164 :
+	n=q;  D  165 :
+	if(n || m || l)  D  166 :
+	{  D  167 :
+	printc('.');  D  168 :{262
+	printc(l+0x30);  D  169 :
+	}  D  170 :}263
+	if(n || m)  D  171 :
+	{  D  172 :
+	printc(m+0x30);  D  173 :{268
+	}  D  174 :}269
+	if(n)  D  175 :
+	{  D  176 :
+	printc(n+0x30>>4);  D  177 :{272
+	}  D  178 :}273
+	  D  179 :
+}//	  D  180 :}274
+  D  181 :
+	prints(char *c)  D  182 :f498V229
+{	int k=0;  D  183 :{276V230
+	while(*c!='\0')  D  184 :
+	{  D  185 :
+	//printf("%c",*c);  D  186 :
+	printc(*c);  D  187 :{281
+	c++;  D  188 :
+	#ifdef selfscroll  D  189 :
+	k++;  D  190 :
+	if(k>15)  D  191 :
+	{  D  192 :
+	delay_ms(200);  D  193 :{284
+	command(0x18);  D  194 :
+	}  D  195 :}285
+	#endif  D  196 :
+	#ifdef newline  D  197 :
+	k++;  D  198 :
+	if(k==16 || k==48)  D  199 :
+	go(64);  D  200 :
+	if(k==32 || k== 64)  D  201 :
+	go(0);  D  202 :
+	#endif  D  203 :
+	}  D  204 :}286
+}//  D  205 :}287
+  D  206 :
+clrscr()  D  207 :f500
+{	  D  208 :{289
+	RS=0;  D  209 :
+	outc(0);	//CLE LCD &MEM HM CUR  D  210 :
+    	delay_us(50);  D  211 :
+    	outc(1);  D  212 :
+    	delay_ms(2);  D  213 :
+	RS=1;  D  214 :
+}//  D  215 :}292
+  D  216 :
+scroll(char *c,long int d)  D  217 :f501V233V234
+{  D  218 :{294
+	int i=15;  D  219 :V235
+ for(i=15;i>0;i--)  D  220 :
+	{  D  221 :
+	go(i);  D  222 :{302
+	prints(c);  D  223 :
+	delay_ms(10*d);  D  224 :V237V238
+	clrscr();  D  225 :
+	}  D  226 :}309
+	while(*c!='\0')  D  227 :
+	{  D  228 :
+	go(0);  D  229 :{313
+	prints(c);  D  230 :
+	c++;  D  231 :
+	delay_ms(10*d);  D  232 :
+	clrscr();  D  233 :
+	}  D  234 :}314
+}//  D  235 :}315
+  D  236 :
+wave(char *c,long int d)  D  237 :f504V240V241
+{	char *t;  D  238 :{317V242
+	int i=15,k=0;  D  239 :V243V244
+	t=c;  D  240 :
+	while(*t!='\0')  D  241 :
+	{k++;t++;}  D  242 :{322}323
+ for(i=16-k;i>=0;i--)  D  243 :
+	{  D  244 :
+	go(i);  D  245 :{328
+	prints(c);  D  246 :
+	delay_ms(10*d);  D  247 :
+	clrscr();  D  248 :
+	if(i==0)  D  249 :
+	break;  D  250 :
+	}  D  251 :}331
+	for(i=0;i<17-k;i++)  D  252 :
+	{  D  253 :
+	go(i);  D  254 :{338
+	prints(c);  D  255 :
+	delay_ms(10*d);  D  256 :
+	clrscr();  D  257 :
+	}//  D  258 :}339
+	  D  259 :
+}//  D  260 :}340E
+ D  260 :
+#include "sht11.c" A    9 :
+ ///////////////////////////////////////////////////////////////////////////////  E    1 :I4
+//                                                                           //  E    2 :
+// Driver file for SHT75 Temperature & Humidity Sensor                       //  E    3 :
+//                                                                           //  E    4 :
+// ***** To initialise SHT75 sensor upon power up *****                      //  E    5 :
+//                                                                           //  E    6 :
+// Function : sht_init()                                                     //  E    7 :
+// Return   : none                                                           //  E    8 :
+//                                                                           //  E    9 :
+//                                                                           //  E   10 :
+// ***** To measure and caluculate SHT75 temp & real RH *****                //  E   11 :
+//                                                                           //  E   12 :
+// Function : sht_rd (temp, truehumid)                                       //  E   13 :
+// Return   : temperature & true humidity in float values                    //  E   14 :
+//                                                                           //  E   15 :
+///////////////////////////////////////////////////////////////////////////////  E   16 :
+  E   17 :
+#define sht_data_pin   PIN_C4  E   18 :
+#define sht_clk_pin    PIN_C3  E   19 :
+  E   20 :
+  E   21 :
+//***** Function to alert SHT75 *****  E   22 :
+  E   23 :
+void comstart (void)  E   24 :f508
+{  E   25 :{342
+ output_float(sht_data_pin);  //data high  E   26 :
+ output_bit(sht_clk_pin, 0);  //clk low  E   27 :
+ delay_us(1);  E   28 :
+ output_bit(sht_clk_pin, 1);  //clk high  E   29 :
+ delay_us(1);  E   30 :
+ output_bit(sht_data_pin, 0); //data low  E   31 :
+ delay_us(1);  E   32 :
+ output_bit(sht_clk_pin, 0);  //clk low  E   33 :
+ delay_us(2);  E   34 :
+ output_bit(sht_clk_pin, 1);  //clk high  E   35 :
+ delay_us(1);  E   36 :
+ output_float(sht_data_pin);  //data high  E   37 :
+ delay_us(1);  E   38 :
+ output_bit(sht_clk_pin, 0);  //clk low  E   39 :
+}  E   40 :}351
+  E   41 :
+  E   42 :
+//***** Function to write data to SHT75 *****  E   43 :
+  E   44 :
+int1 comwrite (int8 iobyte)  E   45 :f509V247
+{  E   46 :{353
+ int8 i, mask = 0x80;  E   47 :V248V249
+ int1 ack;  E   48 :V250
+  E   49 :
+ //Shift out command  E   50 :
+ delay_us(4);  E   51 :
+ for(i=0; i<8; i++)  E   52 :
+  {  E   53 :
+   output_bit(sht_clk_pin, 0);                          //clk low  E   54 :{362
+   if((iobyte & mask) > 0) output_float(sht_data_pin);  //data high if MSB high  E   55 :
+   else output_bit(sht_data_pin, 0);                    //data low if MSB low  E   56 :
+   delay_us(1);  E   57 :
+   output_bit(sht_clk_pin, 1);                          //clk high  E   58 :
+   delay_us(1);  E   59 :
+   mask = mask >> 1;                                    //shift to next bit  E   60 :
+  }  E   61 :}369
+  E   62 :
+ //Shift in ack  E   63 :
+ output_bit(sht_clk_pin, 0);  //clk low  E   64 :
+ delay_us(1);  E   65 :
+ ack = input(sht_data_pin);   //get ack bit  E   66 :
+ output_bit(sht_clk_pin, 1);  //clk high  E   67 :
+ delay_us(1);  E   68 :
+ output_bit(sht_clk_pin, 0);  //clk low  E   69 :
+ return(ack);  E   70 :
+}  E   71 :}378
+  E   72 :
+  E   73 :
+//***** Function to read data from SHT75 *****  E   74 :
+  E   75 :
+int16 comread (void)  E   76 :f513
+{  E   77 :{380
+ int8 i;  E   78 :V252
+ int16 iobyte = 0;  E   79 :V253
+ const int16 mask0 = 0x0000;  E   80 :V254
+ const int16 mask1 = 0x0001;  E   81 :V256
+  E   82 :
+ //shift in MSB data  E   83 :
+ for(i=0; i<8; i++)  E   84 :
+  {  E   85 :
+   iobyte = iobyte << 1;  E   86 :{392
+   output_bit(sht_clk_pin, 1);                //clk high  E   87 :
+   delay_us(1);  E   88 :
+   if (input(sht_data_pin)) iobyte |= mask1;  //shift in data bit  E   89 :
+   else iobyte |= mask0;  E   90 :
+   output_bit(sht_clk_pin, 0);                //clk low  E   91 :
+   delay_us(1);  E   92 :
+  }  E   93 :}398
+  E   94 :
+ //send ack 0 bit  E   95 :
+ output_bit(sht_data_pin, 0); //data low  E   96 :
+ delay_us(1);  E   97 :
+ output_bit(sht_clk_pin, 1);  //clk high  E   98 :
+ delay_us(2);  E   99 :
+ output_bit(sht_clk_pin, 0);  //clk low  E  100 :
+ delay_us(1);  E  101 :
+ output_float(sht_data_pin);  //data high  E  102 :
+  E  103 :
+ //shift in LSB data  E  104 :
+ for(i=0; i<8; i++)  E  105 :
+  {  E  106 :
+   iobyte = iobyte << 1;  E  107 :{409
+   output_bit(sht_clk_pin, 1);                //clk high  E  108 :
+   delay_us(1);  E  109 :
+   if (input(sht_data_pin)) iobyte |= mask1;  //shift in data bit  E  110 :
+   else iobyte |= mask0;  E  111 :
+   output_bit(sht_clk_pin, 0);                //clk low  E  112 :
+   delay_us(1);  E  113 :
+  }  E  114 :}415
+  E  115 :
+ //send ack 1 bit  E  116 :
+ output_float(sht_data_pin);  //data high  E  117 :
+ delay_us(1);  E  118 :
+ output_bit(sht_clk_pin, 1);  //clk high  E  119 :
+ delay_us(2);  E  120 :
+ output_bit(sht_clk_pin, 0);  //clk low  E  121 :
+  E  122 :
+ return(iobyte);  E  123 :
+}  E  124 :}419
+  E  125 :
+  E  126 :
+//***** Function to wait for SHT75 reading *****  E  127 :
+  E  128 :
+void comwait (void)  E  129 :f518
+{  E  130 :{421
+ int16 sht_delay;  E  131 :V259
+  E  132 :
+ output_float(sht_data_pin);                     //data high  E  133 :
+ output_bit(sht_clk_pin, 0);                     //clk low  E  134 :
+ delay_us(1);  E  135 :
+ for(sht_delay=0; sht_delay<30000; sht_delay++)  // wait for max 300ms  E  136 :
+  {  E  137 :
+   if (!input(sht_data_pin)) break;              //if sht_data_pin low, SHT75 ready  E  138 :{430
+   delay_us(10);  E  139 :
+  }  E  140 :}434
+}  E  141 :}435
+  E  142 :
+  E  143 :
+//***** Function to reset SHT75 communication *****  E  144 :
+  E  145 :
+void comreset (void)  E  146 :f520
+{  E  147 :{437
+ int8 i;  E  148 :V261
+  E  149 :
+ output_float(sht_data_pin);    //data high  E  150 :
+ output_bit(sht_clk_pin, 0);    //clk low  E  151 :
+ delay_us(2);  E  152 :
+ for(i=0; i<9; i++)  E  153 :
+  {  E  154 :
+   output_bit(sht_clk_pin, 1);  //toggle clk 9 times  E  155 :{447
+   delay_us(2);  E  156 :
+   output_bit(sht_clk_pin, 0);  E  157 :
+   delay_us(2);  E  158 :
+ }  E  159 :}452
+ comstart();  E  160 :
+}  E  161 :}453
+  E  162 :
+  E  163 :
+//***** Function to soft reset SHT75 *****  E  164 :
+  E  165 :
+void sht_soft_reset (void)  E  166 :f521
+{  E  167 :{455
+ comreset();           //SHT75 communication reset  E  168 :
+ comwrite(0x1e);       //send SHT75 reset command  E  169 :
+ delay_ms(15);         //pause 15 ms  E  170 :
+}  E  171 :}457
+  E  172 :
+  E  173 :
+//***** Function to measure SHT75 temperature *****  E  174 :
+  E  175 :
+int16 measuretemp (void)  E  176 :f522
+{  E  177 :{459
+ int1 ack;  E  178 :V264
+ int16 iobyte;  E  179 :V265
+  E  180 :
+ comstart();             //alert SHT75  E  181 :
+ ack = comwrite(0x03);   //send measure temp command and read ack status  E  182 :
+ if(ack == 1) return;  E  183 :
+ comwait();              //wait for SHT75 measurement to complete  E  184 :
+ iobyte = comread();     //read SHT75 temp data  E  185 :
+ return(iobyte);  E  186 :
+}  E  187 :}468
+  E  188 :
+  E  189 :
+//***** Function to measure SHT75 RH *****  E  190 :
+  E  191 :
+int16 measurehumid (void)  E  192 :f523
+{  E  193 :{470
+ int1 ack;  E  194 :V267
+ int16 iobyte;  E  195 :V268
+  E  196 :
+ comstart();            //alert SHT75  E  197 :
+ ack = comwrite(0x05);  //send measure RH command and read ack status  E  198 :
+ if(ack == 1) return;  E  199 :
+ comwait();             //wait for SHT75 measurement to complete  E  200 :
+ iobyte = comread();    //read SHT75 temp data  E  201 :
+ return(iobyte);  E  202 :
+}  E  203 :}479
+  E  204 :
+  E  205 :
+//***** Function to calculate SHT75 temp & RH *****  E  206 :
+  E  207 :
+void calculate_data (int16 temp, int16 humid, float & tc, float & rhlin, float & rhtrue)  E  208 :f524V270V271V272V273V274
+{  E  209 :{481
+ float truehumid1, rh;  E  210 :V275V276
+  E  211 :
+ //calculate temperature reading  E  212 :
+ tc = ((float) temp * 0.01) - 40.0;  E  213 :
+  E  214 :
+ //calculate Real RH reading  E  215 :
+ rh = (float) humid;  E  216 :
+  E  217 :
+ rhlin = (rh * 0.0405) - (rh * rh * 0.0000028) - 4.0;  E  218 :
+  E  219 :
+ //calculate True RH reading  E  220 :
+ rhtrue = ((tc - 25.0) * (0.01 + (0.00008 * rh))) + rhlin;  E  221 :
+}  E  222 :}483
+  E  223 :
+  E  224 :
+//***** Function to measure & calculate SHT75 temp & RH *****  E  225 :
+  E  226 :
+void sht_rd (float & temp, float & truehumid)  E  227 :f532V278V279
+{  E  228 :{485
+ int16 restemp, reshumid;  E  229 :V280V281
+ float realhumid;  E  230 :V282
+ restemp = 0; truehumid = 0;  E  231 :
+  E  232 :
+ restemp = measuretemp();    //measure temp  E  233 :
+ reshumid = measurehumid();  //measure RH  E  234 :
+calculate_data (restemp, reshumid, temp, realhumid, truehumid);  //calculate temp & RH  E  235 :
+}  E  236 :}487
+  E  237 :
+  E  238 :
+//***** Function to initialise SHT75 on power-up *****  E  239 :
+  E  240 :
+void sht_init (void)  E  241 :f537
+{  E  242 :{489
+ comreset();    //reset SHT75  E  243 :
+ delay_ms(20);  //delay for power-up  E  244 :
+}	  E  245 :}491E
+ E  245 :
+  A   10 :
+void rain(void);  A   11 :f538P538
+void soil(void);  A   12 :f539P539
+double map(double value, float x_min, float x_max, float y_min, float y_max);   A   13 :f540V287V288V289V290V291P540
+  A   14 :
+unsigned int16 s;  A   15 :V292
+float y,v,x=0.00;  A   16 :V293V294V295
+int a,r;  A   17 :V296V297
+void main()  A   18 :f550
+{  A   19 :{499
+ float restemp, truehumid;  A   20 :V299V300
+ trisa0=1;  A   21 :
+ trisa1=0;  A   22 :
+ adcon1=0x0e;  A   23 :
+ trisb=0x00;  A   24 :
+ //trisd1=0;  A   25 :
+ lcdinit();  A   26 :
+ go(0);  A   27 :
+ printc("  RAIN GUAGE  ");  A   28 :
+ sht_init();  A   29 :
+  A   30 :
+ while(1)  A   31 :
+ {  A   32 :
+   rain();	   A   33 :{509
+   setup_adc(ADC_CLOCK_INTERNAL);  A   34 :
+   //printf("BGW:");  A   35 :
+   printf("RAIN;%3.2f;",x);  A   36 :V305V306
+   soil();  A   37 :
+   sht_rd (restemp, truehumid);  A   38 :
+   printf("Temp;%3.1f;", restemp, 223);  A   39 :
+   printf("RH;%3.1f\n", truehumid);  A   40 :
+   delay_ms(50);        //delay 500 ms between reading to prevent self heating of sensor  A   41 :
+ }  A   42 :}592
+}  A   43 :}593
+  A   44 :
+/*  A   45 :
+////////////////////////END OF MAIN PROGRAM //////////////////////////////////////  A   46 :
+*/  A   47 :
+  A   48 :
+void rain()  A   49 :f538
+{  A   50 :{594
+  a=input(PIN_A1);  A   51 :
+  if(a)  A   52 :
+  {  A   53 :
+	x=x+0.2;    A   54 :{600
+	r++	  ;  A   55 :
+    //printf("%d",r);  A   56 :
+    //printf("RAIN = %3.2f",x);  A   57 :
+    //delay_ms(500); 	  A   58 :
+  }    A   59 :}601
+}  A   60 :}602
+	  A   61 :
+void soil()  A   62 :f539
+{  A   63 :{603
+  //setup_adc_ports(AN0_AN1_AN2_AN4_AN5_AN6_AN7_VSS_VREF);//to setup a0 as analog read and a3 as reference	  A   64 :
+  set_adc_channel(0);  A   65 :
+  delay_us(20);  A   66 :
+  s=read_adc();  A   67 :
+  //printf("VALUE=%lu\t",s);  A   68 :
+  y= 0.0048 * s;  A   69 :
+  //printf("SOIL=%f",y);   A   70 :
+  if(y > 0.00 && y < 0.25)  A   71 :V310V311
+  {  A   72 :
+  	  v = map(y, 0,0.25, 0,2.5);  A   73 :{618
+      printf("VWC;%3.3f;",v);   A   74 :
+  }  A   75 :}625
+  else if(y > 0.25 && y < 0.5)  A   76 :
+  {  A   77 :
+	  v = map(y, 0.25,0.5, 2.5,7.5);  A   78 :{631
+      printf("VWC;%3.3f;",v);   A   79 :
+  }   A   80 :}638
+   else if(y > 0.5 && y < 0.75)  A   81 :
+  {  A   82 :
+	  v = map(y, 0.5,0.75, 7.5,10.0);  A   83 :{644
+      printf("VWC;%3.3f;",v);   A   84 :
+  }   A   85 :}651
+   else if(y > 0.75 && y < 1.0)  A   86 :
+  {  A   87 :
+	  v = map(y, 0.75, 1.0 , 10.0 , 12.5);  A   88 :{657
+      printf("VWC;%3.3f;",v);   A   89 :
+  }   A   90 :}664
+   else if(y > 1.0 && y < 1.25)  A   91 :
+  {  A   92 :
+	  v = map(y, 1.0,1.25, 12.5,15.0);  A   93 :{670
+      printf("VWC;%3.3f;",v);   A   94 :
+  }   A   95 :}677
+   else if(y > 1.25 && y < 1.5)  A   96 :
+  {  A   97 :
+	  v = map(y, 1.25,1.5, 15.0,25.0);  A   98 :{683
+      printf("VWC;%3.3f;",v);   A   99 :
+  }   A  100 :}690
+   else if(y > 1.5 && y < 1.75)  A  101 :
+  {  A  102 :
+	  v = map(y, 1.5, 1.75, 25.0 , 35.0);  A  103 :{696
+      printf("VWC;%3.3f;",v);   A  104 :
+  }   A  105 :}703
+   else if(y > 1.75 && y < 2.0)  A  106 :
+  {  A  107 :
+	  v = map(y, 1.75, 2.0, 35.0 , 45.0);  A  108 :{709
+      printf("VWC;%3.3f;",v);   A  109 :
+  }   A  110 :}716
+   else if(y > 2.0 && y < 2.5)  A  111 :
+  {  A  112 :
+	  v = map(y, 2.0 , 2.5, 45.0 , 50.0);  A  113 :{722
+      printf("VWC;%3.3f;",v);   A  114 :
+  }   A  115 :}729
+   A  116 :
+}  A  117 :}730
+   A  118 :
+ double map(double value, float x_min, float x_max, float y_min, float y_max)     A  119 :f540V287V288V289V290V291
+{                                 A  120 :{731
+    return (y_min + (((y_max - y_min)/(x_max - x_min)) * (value - x_min)));  A  121 :
+}  A  122 :}733E
+

@@ -1,0 +1,15 @@
+>>> Warning 208 "F:\Beginow\rainguage\rainguage code\lcd_R.h" Line 96(1,2): Function not void and does not return a value
+>>> Warning 208 "F:\Beginow\rainguage\rainguage code\lcd_R.h" Line 180(1,2): Function not void and does not return a value
+>>> Warning 208 "F:\Beginow\rainguage\rainguage code\lcd_R.h" Line 205(1,2): Function not void and does not return a value
+>>> Warning 208 "F:\Beginow\rainguage\rainguage code\lcd_R.h" Line 215(1,2): Function not void and does not return a value
+>>> Warning 208 "F:\Beginow\rainguage\rainguage code\lcd_R.h" Line 235(1,2): Function not void and does not return a value
+>>> Warning 203 "F:\Beginow\rainguage\rainguage code\lcd_R.h" Line 243(1,1): Condition always TRUE
+>>> Warning 208 "F:\Beginow\rainguage\rainguage code\sht11.c" Line 260(1,2): Function not void and does not return a value
+>>> Warning 208 "F:\Beginow\rainguage\rainguage code\sht11.c" Line 183(15,21): Function not void and does not return a value
+>>> Warning 208 "F:\Beginow\rainguage\rainguage code\sht11.c" Line 199(15,21): Function not void and does not return a value
+>>> Warning 203 "F:\Beginow\rainguage\rainguage code\rainguage.c" Line 32(1,1): Condition always TRUE
+>>> Warning 202 "F:\Beginow\rainguage\rainguage code\rainguage.c" Line 6(5,8): Variable never used  rs232_errors
+>>> Warning 202 "F:\Beginow\rainguage\rainguage code\lcd_R.h" Line 124(29,30): Variable never used  x
+>>> Warning 202 "F:\Beginow\rainguage\rainguage code\sht11.c" Line 210(8,18): Variable never used  truehumid1
+      Memory usage:   ROM=45%      RAM=18% - 57%
+      0 Errors,  13 Warnings.

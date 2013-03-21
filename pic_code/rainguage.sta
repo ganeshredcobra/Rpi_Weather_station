@@ -1,0 +1,55 @@
+
+ROM used: 3654 (45%)
+          3754 (46%) including unused fragments
+
+          3 Average locations per line
+          11 Average locations per statement
+
+RAM used: 32 (18%) at main() level
+          100 (57%) worst case
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  122    64  20  F:\Beginow\rainguage\rainguage code\rainguage.c
+  304     0   0  C:\PROGRA~1\PICC\devices\16F877A.h
+  159     0   0  C:\PROGRA~1\PICC\drivers\pic.h
+  261   146  38  F:\Beginow\rainguage\rainguage code\lcd_R.h
+  246   111  21  F:\Beginow\rainguage\rainguage code\sht11.c
+----- -----
+ 2184   642 Total
+
+Page ROM  %  RAM  Functions:
+---- --- --- ---  ----------
+0     19   1   1  @delay_ms2
+0     31   1   1  outc
+0     99   3   0  lcdinit
+0     19   1   2  printc
+0     10   0   2  go
+0    205   6  14  @DIVFF
+0     30   1   2  @ITOF
+0    118   3  13  @MULFF
+0    339   9  16  @ADDFF
+0     70   2   0  comstart
+0     96   3   5  comwrite
+0    142   4   3  comread
+0     43   1   2  comwait
+0     47   1   0  sht_init
+1    595  16   9  main
+0     19   1   0  @const10502
+0     16   0   0  @const10510
+0    385  11  18  @PRINTF_F_9600_62_63
+0     16   0   0  @const10579
+0     39   1   0  rain
+1   1111  30   8  soil
+0     63   2  10  @FLT
+0     15   0   0  @const10619
+0    123   3  28  map
+
+ Segment   Used  Free
+---------  ----  ----
+00000-00003     4  0
+00004-007FF  1944  100
+00800-00FFF  1706  342
+01000-017FF     0  2048
+01800-01FFF     0  2048
+

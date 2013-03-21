@@ -1,0 +1,190 @@
+001     tmr0
+002     pcl
+003     status
+005.0   ra0
+005     porta
+005.1   ra1
+005.2   ra2
+005.3   ra3
+005.4   ra4
+005.5   ra5
+006.0   rb0
+006     portb
+006.1   rb1
+006.2   rb2
+006.3   rb3
+006.4   rb4
+006.5   rb5
+006.6   rb6
+006.7   rb7
+007     portc
+007.0   rc0
+007.1   rc1
+007.2   rc2
+007.3   rc3
+007.4   rc4
+007.5   rc5
+007.6   rc6
+007.7   rc7
+008     PSP_DATA
+008     portd
+008.0   rd0
+008.1   rd1
+008.2   rd2
+008.3   rd3
+008.4   rd4
+008.5   rd5
+008.6   rd6
+008.7   rd7
+009     porte
+009.0   re0
+009.1   re1
+009.2   re2
+00A     pclath
+00B.0   rbif
+00B     intcon
+00B.1   intf
+00B.2   t0if
+00B.3   rbie
+00B.4   inte
+00B.5   t0ie
+00B.6   peie
+00B.7   gie
+00C     pir1
+00D     pir2
+00E     tmr1l
+00F     tmr1h
+010     t1con
+011     tmr2
+012     t2con
+013     sspbuf
+014     sspcon
+015     ccpr1l
+015     CCP_1_LOW
+015-016 CCP_1
+016     ccpr1h
+016     CCP_1_HIGH
+017     ccp1con
+018     rcsta
+019     txreg
+01A     rcreg
+01B     ccpr2l
+01B     CCP_2_LOW
+01B-01C CCP_2
+01C     CCP_2_HIGH
+01C     ccpr2h
+01D     ccp2con
+01E     adresh
+01F     adcon0
+01F.2   adgo
+020     in
+020     strtok.save
+020.0   g0
+020.1   g1
+020.2   g2
+020.3   g3
+020.4   g4
+020.5   g5
+020.6   g6
+020.7   g7
+021     go.p
+021     main.@SCRATCH
+022     @delay_ms2.P1
+022     go.@SCRATCH
+023     printc.a
+024     printc.@SCRATCH
+025     outc.a
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+07B     @SCRATCH
+081.0   ps0
+081     option_reg
+081.1   ps1
+081.2   ps2
+081.3   psa
+081.4   t0se
+081.5   t0cs
+081.6   intedg
+081.7   rbpu
+085     trisa
+086     trisb
+086.0   trisb0
+086.1   trisb1
+086.2   trisb2
+086.3   trisb3
+086.4   trisb4
+086.5   trisb5
+086.6   trisb6
+086.7   trisb7
+087.0   trisc0
+087     trisc
+087.1   trisc1
+087.2   trisc2
+087.3   trisc3
+087.4   trisc4
+087.5   trisc5
+087.6   trisc6
+087.7   trisc7
+088     trisd
+089     trise
+08C     pie1
+08D     pie2
+08E     pcon
+091     sspcon2
+092     pr2
+093     sspadd
+094     sspstat
+098     txsta
+099     spbrg
+09C     cmcon
+09C.6   C1OUT
+09C.7   C2OUT
+09D     cvrcon
+09E     adresl
+09F     adcon1
+10C     eedata
+10D     eeadr
+10E     eedath
+10F     eeadrh
+18C     eecon1
+18D     eecon2
+
+000E  @delay_ms2
+0038  enb
+0021  outc
+0040  lcdinit
+00A3  printc
+00B6  go
+00C0  main
+0004  @const10682
+00C0  @cinit
+
+Project Files:
+    D:\Beginow\Mplab\pic.c
+    C:\PROGRA~1\PICC\devices\16f877a.h
+    C:\PROGRA~1\PICC\drivers\pic.h
+    D:\Beginow\Mplab\lcd1JOVIN.h
+    C:\PROGRA~1\PICC\drivers\string.h
+    C:\PROGRA~1\PICC\drivers\stddef.h
+    C:\PROGRA~1\PICC\drivers\ctype.h
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   8
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: 1,8,16
+
+Output Files:
+    Diagnostics: D:\Beginow\Mplab\pic.$$$
+    Errors:      D:\Beginow\Mplab\pic.err
+    INHX8:       pic.HEX
+    Symbols:     pic.SYM
+    List:        pic.LST
+    Debug/COFF:  pic.cof
+    Project:     pic.PJT
+    Call Tree:   D:\Beginow\Mplab\pic.tre
+    Statistics:  D:\Beginow\Mplab\pic.sta

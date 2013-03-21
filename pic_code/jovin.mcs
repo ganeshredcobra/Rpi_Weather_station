@@ -1,0 +1,26 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=rainguage.$$$
+Folder=Intermediary
+[File001]
+Location=F:\Beginow\rainguage\rainguage code\rainguage.o
+Folder=Intermediary
+[File002]
+Location=rainguage.HEX
+Folder=Output
+[File003]
+Location=rainguage.LST
+Folder=Output
+[File004]
+Location=rainguage.PJT
+Folder=Output
+[File005]
+Location=rainguage.ERR
+Folder=Output
+[File006]
+Location=rainguage.COF
+Folder=Output
+[TOOL_LOC_STAMPS]
+tool_loc{0C155615-B197-4A4B-AEB6-343BB3F41A35}=C:\Program files\Picc\CCSC.exe
