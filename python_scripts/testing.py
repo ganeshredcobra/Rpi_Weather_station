@@ -47,7 +47,12 @@ while True:
 	   file.write('%s: '%TIME+data+'\n')
 	   #try:
 	   v='%s'%TIME+data+'\n'
-	   upload()
+	   #print len(v)
+	   if len(v)==58:
+	   	upload()
+	   else:
+	   	v="Insufficient Data"
+		upload()
 	   time.sleep(60)
 	   #ser.flushInput()
 	   #ser.flushOutput()
