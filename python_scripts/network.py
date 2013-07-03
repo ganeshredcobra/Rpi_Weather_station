@@ -21,14 +21,35 @@
 #       MA 02110-1301, USA.
 
 
-
-import urllib2
-import time
-import os,sys
-import syslog
+from os import fork, chdir, setsid, umask
+from sys import exit
+import serial,os
+import time,sys
+from datetime import datetime
+import commands
+import syslog,os
+import urllib,httplib,urllib2
 
 count = 1
 PATH = "/etc/ppp/peers/docomo"
+
+def timestamp():
+	FORMAT = '%Y-%m-%d;%H-%M-%S'
+	STAMP = '%s' % (datetime.now().strftime(FORMAT))
+	return STAMP
+
+def upload():
+	params = urllib.urlencode({'rdata' : '%s\n'%v})
+	headers = {"Content-type": "application/x-www-form-urlencoded","Accept": "text/plain"}
+	conn = httplib.HTTPConnection("c11.space-kerala.org:80")
+	conn.request("POST", "/data.php",params, headers)
+	response = conn.getresponse()
+	#print response.status, response.reason
+	data = response.read()
+	#print data
+	conn.close()
+
+
 
 def edit_ppp():
 	newp=dev()
@@ -73,8 +94,31 @@ def internet_on():
 		os.system('pon docomo')
 
 if __name__ == '__main__':	
+	raw=commands.getoutput("dmesg | grep 'pl2303 converter now attached to'")
+	port=raw[-7:]
+	syslog.syslog('prolific port %s'%port)
+	ser = serial.Serial("/dev/%s"%port, 9600, timeout=1)
 	os.system('pon docomo')
 	while count!=0:
-		internet_on()
-		syslog.syslog("Internet available")
-		time.sleep(5)
+		#internet_on()
+		#syslog.syslog("Internet available")
+		#time.sleep(5)
+		ser.flushInput()
+		data=ser.readline()
+		#print data
+		TIME=timestamp()
+		if data!='':
+		   file=open('/var/www/serial.txt','a')
+		   file.write('%s: '%TIME+data+'\n')
+		   v='%s'%TIME+data+'\n'
+		   #print len(v)
+		   internet_on()
+		   syslog.syslog("Internet available")
+		   time.sleep(5)
+		   if len(v)==62:
+	   			upload()
+		   else:
+			   	v="Insufficient Data"
+				upload()
+		time.sleep(60)
+	 
