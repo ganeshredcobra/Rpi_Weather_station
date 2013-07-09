@@ -31,6 +31,7 @@ import syslog,os
 import urllib,httplib,urllib2
 
 count = 1
+v=""
 PATH = "/etc/ppp/peers/docomo"
 
 def timestamp():
@@ -38,7 +39,7 @@ def timestamp():
 	STAMP = '%s' % (datetime.now().strftime(FORMAT))
 	return STAMP
 
-def upload():
+def upload(v):
 	params = urllib.urlencode({'rdata' : '%s\n'%v})
 	headers = {"Content-type": "application/x-www-form-urlencoded","Accept": "text/plain"}
 	conn = httplib.HTTPConnection("c11.space-kerala.org:80")
@@ -116,9 +117,9 @@ if __name__ == '__main__':
 		   syslog.syslog("Internet available")
 		   time.sleep(5)
 		   if len(v)==62:
-	   			upload()
+	   			upload(v)
 		   else:
 			   	v="Insufficient Data"
-				upload()
+				upload(v)
 		time.sleep(60)
 	 
