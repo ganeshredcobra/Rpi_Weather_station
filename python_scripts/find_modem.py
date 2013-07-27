@@ -25,7 +25,10 @@ def iden_port():
 	raw=commands.getoutput("dmesg | grep 'GSM modem (1-port) converter now attached to'")
 	mod=raw.splitlines()
 	if (len(mod) == 0):
-		commands.getoutput('sudo usb_modeswitch -I -W -c /etc/usb_modeswitch.d/12d1\:1505')
+		ven=commands.getoutput('lsusb|grep "Huawei Technologies"')
+		ven_id=ven.split()[5][-4:]
+		print ven_id
+		commands.getoutput('sudo usb_modeswitch -I -W -c /etc/usb_modeswitch.d/12d1\:%s'%ven_id)
 		time.sleep(10)
 		raw=commands.getoutput("dmesg | grep 'GSM modem (1-port) converter now attached to'")
 		mod=raw.splitlines()
@@ -64,6 +67,8 @@ def main():
 			print newp		
 			edit_ppp(newp)
 			syslog.syslog("editing done")
+			os.system('pon docomo')
+			os.system('sudo /etc/init.d/network start')
 			break
 		else:
 			print "ddd"
