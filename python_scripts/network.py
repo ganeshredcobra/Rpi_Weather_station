@@ -31,18 +31,18 @@ import syslog,os
 import urllib,httplib,urllib2
 
 count = 1
-v=""
 PATH = "/etc/ppp/peers/docomo"
+v=""
 
 def timestamp():
 	FORMAT = '%Y-%m-%d;%H-%M-%S'
 	STAMP = '%s' % (datetime.now().strftime(FORMAT))
 	return STAMP
 
-def upload(v):
-	params = urllib.urlencode({'rdata' : '%s\n'%v})
+def upload(data):
+	params = urllib.urlencode({'rdata' : '%s\n'%data})
 	headers = {"Content-type": "application/x-www-form-urlencoded","Accept": "text/plain"}
-	conn = httplib.HTTPConnection("c11.space-kerala.org:80")
+	conn = httplib.HTTPConnection("linode.space-kerala.org:80")
 	conn.request("POST", "/data.php",params, headers)
 	response = conn.getresponse()
 	#print response.status, response.reason
@@ -70,12 +70,13 @@ def edit_ppp():
 
 def dev():
 	os.system('touch /tmp/dev.txt')
-	os.system('sudo wvdialconf > /tmp/dev.txt')
+	os.system('wvdialconf > /tmp/dev.txt')
 	file=open('/tmp/dev.txt','r+')
 	re=file.read()
 	f=re.splitlines()
 	b=f[5]
 	port_dev=b[-8:-1]
+	print port_dev
 	if port_dev[:6]=="ttyUSB":
 		return port_dev
 	else:
@@ -89,21 +90,25 @@ def internet_on():
 		syslog.syslog('ppp error in except')
 		os.system('poff docomo')
 		syslog.syslog("Error in network")
-		edit_ppp()
+		#edit_ppp()
 		#send sms
 		time.sleep(5)
 		os.system('pon docomo')
+		time.sleep(15)
 
-if __name__ == '__main__':	
+def main():	
+	time.sleep(50)
 	raw=commands.getoutput("dmesg | grep 'pl2303 converter now attached to'")
 	port=raw[-7:]
+	print port
 	syslog.syslog('prolific port %s'%port)
 	ser = serial.Serial("/dev/%s"%port, 9600, timeout=1)
 	os.system('pon docomo')
+	time.sleep(15)
 	while count!=0:
-		#internet_on()
-		#syslog.syslog("Internet available")
-		#time.sleep(5)
+		internet_on()
+		syslog.syslog("Internet available")
+		time.sleep(5)
 		ser.flushInput()
 		data=ser.readline()
 		#print data
@@ -116,10 +121,31 @@ if __name__ == '__main__':
 		   internet_on()
 		   syslog.syslog("Internet available")
 		   time.sleep(5)
-		   if len(v)==62:
+		   if len(v) > 54:
 	   			upload(v)
 		   else:
 			   	v="Insufficient Data"
 				upload(v)
 		time.sleep(60)
-	 
+
+# Dual fork hack to make process run as a daemon
+if __name__ == "__main__":
+      try:
+        pid = fork()
+        if pid > 0:
+          exit(0)
+      except OSError, e:
+        exit(1)
+
+      chdir("/")
+      setsid()
+      umask(0)
+
+      try:
+        pid = fork()
+        if pid > 0:
+          exit(0)
+      except OSError, e:
+        exit(1)
+
+main()
