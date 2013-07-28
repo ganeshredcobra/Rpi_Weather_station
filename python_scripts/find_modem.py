@@ -3,10 +3,29 @@ import serial
 import commands
 import time
 import syslog
+import urllib,httplib,urllib2
+
 
 PATH = "/etc/ppp/peers/docomo"
 devs = []
 ret = []
+flag="False"
+
+def internet_on():	
+    try:
+        response=urllib2.urlopen('http://google.com',timeout=1)
+	flag=True
+	print flag
+	return flag
+    except:
+		syslog.syslog('ppp error in except')
+		os.system('poff docomo')
+		syslog.syslog("Error in network")
+		#edit_ppp()
+		#send sms
+		time.sleep(5)
+		os.system('pon docomo')
+		time.sleep(15)
 
 def edit_ppp(new_port):
 	syslog.syslog("editing")
@@ -68,11 +87,14 @@ def main():
 			edit_ppp(newp)
 			syslog.syslog("editing done")
 			os.system('pon docomo')
+			time.sleep(15)
+			while flag!="False":
+				internet_on()
 			os.system('sudo /etc/init.d/network start')
 			break
 		else:
 			print "ddd"
-			pass
+			internet_on()
 	syslog.syslog("hello")
 
 
