@@ -10,6 +10,7 @@ PATH = "/etc/ppp/peers/docomo"
 devs = []
 ret = []
 flag="False"
+iden_mod="Manufacturer: +GMI: HUAWEI TECHNOLOGIES CO., LTD"
 
 def internet_on():	
     try:
@@ -80,7 +81,7 @@ def main():
 		sendCommand("ATi")
 		print ret
 		print('%s'%ret[1])
-		if ret[1] == "Manufacturer: +GMI: HUAWEI TECHNOLOGIES CO., LTD":
+		if iden_mod in ret:
 			print(":)")
 			newp=devs[i]
 			print newp		
