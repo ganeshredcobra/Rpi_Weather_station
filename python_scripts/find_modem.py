@@ -78,14 +78,14 @@ def main():
 		syslog.syslog('%s'%devs[i])
 		ser=serial.Serial('/dev/%s'%devs[i], baudrate=115200, timeout=.1, rtscts=0)
 		sendCommand("ATi")
-		#print ret
-		syslog.syslog('%s'%ret[0])
-		if ret[0] == "Manufacturer: +GMI: HUAWEI TECHNOLOGIES CO., LTD":
-			syslog.syslog(":)")
+		print ret
+		print('%s'%ret[1])
+		if ret[1] == "Manufacturer: +GMI: HUAWEI TECHNOLOGIES CO., LTD":
+			print(":)")
 			newp=devs[i]
 			print newp		
 			edit_ppp(newp)
-			syslog.syslog("editing done")
+			print("editing done")
 			os.system('pon docomo')
 			time.sleep(15)
 			while flag!="False":
