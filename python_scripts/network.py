@@ -94,18 +94,26 @@ def internet_on():
 		#send sms
 		time.sleep(5)
 		os.system('pon docomo')
-		time.sleep(15)
+		time.sleep(20)
 
 def main():	
-	time.sleep(50)
-	raw=commands.getoutput("dmesg | grep 'pl2303 converter now attached to'")
-	port=raw[-7:]
-	print port
-	syslog.syslog('prolific port %s'%port)
-	ser = serial.Serial("/dev/%s"%port, 9600, timeout=1)
-	os.system('pon docomo')
-	time.sleep(15)
+	#time.sleep(50)
+	#raw=commands.getoutput("dmesg | grep 'pl2303 converter now attached to'")
+	#port=raw[-7:]
+	#print port
+	#syslog.syslog('prolific port %s'%port)
+	#ser = serial.Serial("/dev/%s"%port, 9600, timeout=1)
+	#os.system('pon docomo')
+	#time.sleep(15)
 	while count!=0:
+		time.sleep(50)
+		raw=commands.getoutput("dmesg | grep 'pl2303 converter now attached to'")
+		port=raw[-7:]
+		print port
+		syslog.syslog('prolific port %s'%port)
+		ser = serial.Serial("/dev/%s"%port, 9600, timeout=1)
+		os.system('pon docomo')
+		time.sleep(20)	
 		internet_on()
 		syslog.syslog("Internet available")
 		time.sleep(5)
@@ -122,11 +130,21 @@ def main():
 		   syslog.syslog("Internet available")
 		   time.sleep(5)
 		   if len(v) > 54:
+			try:
 	   			upload(v)
+				syslog.syslog("Uploaded sucessful")
+			except:
+				syslog.syslog("Couldnt upload")
 		   else:
+			try:
 			   	v="Insufficient Data"
 				upload(v)
-		time.sleep(60)
+				syslog.syslog("Uploaded sucessful")
+			except:
+				syslog.syslog("Couldnt upload")
+		ser.close()
+		os.system('poff docomo')
+		time.sleep(600)
 
 # Dual fork hack to make process run as a daemon
 if __name__ == "__main__":
