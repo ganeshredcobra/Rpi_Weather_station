@@ -97,14 +97,6 @@ def internet_on():
 		time.sleep(20)
 
 def main():	
-	#time.sleep(50)
-	#raw=commands.getoutput("dmesg | grep 'pl2303 converter now attached to'")
-	#port=raw[-7:]
-	#print port
-	#syslog.syslog('prolific port %s'%port)
-	#ser = serial.Serial("/dev/%s"%port, 9600, timeout=1)
-	#os.system('pon docomo')
-	#time.sleep(15)
 	while count!=0:
 		time.sleep(50)
 		raw=commands.getoutput("dmesg | grep 'pl2303 converter now attached to'")
