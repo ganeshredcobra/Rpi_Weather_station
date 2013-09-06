@@ -88,15 +88,24 @@ def internet_on():
         response=urllib2.urlopen('http://google.com',timeout=1)
     except:
 		syslog.syslog('ppp error in except')
-		os.system('poff docomo')
-		syslog.syslog("Error in network")
+		os.system('python /home/pi/Documents/tmp_modem.py')
+		#os.system('poff docomo')
+		#syslog.syslog("Error in network")
 		#edit_ppp()
 		#send sms
 		time.sleep(5)
-		os.system('pon docomo')
+		#os.system('pon docomo')
 		time.sleep(20)
 
 def main():	
+	#time.sleep(50)
+	#raw=commands.getoutput("dmesg | grep 'pl2303 converter now attached to'")
+	#port=raw[-7:]
+	#print port
+	#syslog.syslog('prolific port %s'%port)
+	#ser = serial.Serial("/dev/%s"%port, 9600, timeout=1)
+	#os.system('pon docomo')
+	#time.sleep(15)
 	while count!=0:
 		time.sleep(50)
 		raw=commands.getoutput("dmesg | grep 'pl2303 converter now attached to'")
@@ -131,7 +140,7 @@ def main():
 			try:
 			   	v="Insufficient Data"
 				upload(v)
-				syslog.syslog("Uploaded sucessful")
+				syslog.syslog("Insufficient Uploaded sucessful")
 			except:
 				syslog.syslog("Couldnt upload")
 		ser.close()
